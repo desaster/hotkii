@@ -46,12 +46,12 @@ class HotkeyManager : IMessageFilter, IDisposable
         uint mods = (uint) modifiers | (uint) HotkeyModifiers.NoRepeat;
 
         if (!RegisterHotKey(IntPtr.Zero, id, mods, (uint) key)) {
-            Console.WriteLine($"  Failed to register hotkey: {modifiers}+{key}");
+            Log.Write($"  Failed to register hotkey: {modifiers}+{key}");
             return false;
         }
 
         callbacks[id] = callback;
-        Console.WriteLine($"  Registered hotkey: {FormatHotkey(key, modifiers)}");
+        Log.Write($"  Registered hotkey: {FormatHotkey(key, modifiers)}");
         return true;
     }
 

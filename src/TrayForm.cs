@@ -8,10 +8,12 @@ class TrayForm : Form
 {
     private NotifyIcon trayIcon;
     private HotkeyManager hotkeyManager;
+    private LogForm logForm;
 
     public TrayForm()
     {
         hotkeyManager = new HotkeyManager();
+        logForm = new LogForm();
 
         ShowInTaskbar = false;
         WindowState = FormWindowState.Minimized;
@@ -21,6 +23,7 @@ class TrayForm : Form
         var contextMenu = new ContextMenuStrip();
         contextMenu.Items.Add($"Hotkii {BuildVersion.Git}").Enabled = false;
         contextMenu.Items.Add("-");
+        contextMenu.Items.Add("Debug Log", null, OnShowLog);
         contextMenu.Items.Add("Exit", null, OnExit);
 
         trayIcon = new NotifyIcon
@@ -72,12 +75,12 @@ class TrayForm : Form
         try {
             config = ConfigLoader.Load(configPath);
         } catch (Exception ex) {
-            Console.WriteLine($"Error loading config: {ex.Message}");
+            Log.Write($"Error loading config: {ex.Message}");
             return;
         }
 
-        Console.WriteLine($"Config: {configPath}");
-        Console.WriteLine($"Loading {config.Hotkeys.Count} hotkey(s)...");
+        Log.Write($"Config: {configPath}");
+        Log.Write($"Loading {config.Hotkeys.Count} hotkey(s)...");
 
         int registered = 0, failed = 0;
         foreach (var hotkey in config.Hotkeys) {
@@ -97,13 +100,19 @@ class TrayForm : Form
                     failed++;
                 }
             } catch (ConfigException ex) {
-                Console.WriteLine($"  Config error: {ex.Message}");
+                Log.Write($"  Config error: {ex.Message}");
                 failed++;
             }
         }
 
-        Console.WriteLine($"Ready ({registered} hotkeys active"
+        Log.Write($"Ready ({registered} hotkeys active"
             + (failed > 0 ? $", {failed} failed" : "") + ")");
+    }
+
+    private void OnShowLog(object? sender, EventArgs e)
+    {
+        logForm.Show();
+        logForm.BringToFront();
     }
 
     private void OnExit(object? sender, EventArgs e)

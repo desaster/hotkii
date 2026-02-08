@@ -29,10 +29,10 @@ static class VirtualDesktopHelper
             var mgrType = Type.GetTypeFromCLSID(ComGuids.CLSID_VirtualDesktopManager)!;
             manager = (IVirtualDesktopManager) Activator.CreateInstance(mgrType)!;
 
-            Console.WriteLine($"Virtual desktop API initialized ({GetDesktopCount()} desktops)");
+            Log.Write($"Virtual desktop API initialized ({GetDesktopCount()} desktops)");
         } catch (Exception ex) {
             initError = ex.Message;
-            Console.WriteLine($"Failed to initialize virtual desktop API: {ex.Message}");
+            Log.Write($"Failed to initialize virtual desktop API: {ex.Message}");
         }
     }
 
@@ -50,13 +50,13 @@ static class VirtualDesktopHelper
     {
         EnsureInitialized();
         if (managerInternal == null) {
-            Console.WriteLine($"Cannot switch desktop: {initError}");
+            Log.Write($"Cannot switch desktop: {initError}");
             return;
         }
 
         int count = managerInternal.GetCount();
         if (index < 0 || index >= count) {
-            Console.WriteLine($"Desktop {index + 1} does not exist (have {count})");
+            Log.Write($"Desktop {index + 1} does not exist (have {count})");
             return;
         }
 
@@ -66,7 +66,7 @@ static class VirtualDesktopHelper
         var desktop = (IVirtualDesktop) obj;
 
         managerInternal.SwitchDesktop(desktop);
-        Console.WriteLine($"Switched to desktop {index + 1}");
+        Log.Write($"Switched to desktop {index + 1}");
 
         Marshal.ReleaseComObject(desktop);
         Marshal.ReleaseComObject(desktops);

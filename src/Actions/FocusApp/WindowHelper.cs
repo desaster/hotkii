@@ -68,7 +68,7 @@ static class WindowHelper
     {
         var processes = Process.GetProcessesByName(processName);
         if (processes.Length == 0) {
-            Console.WriteLine($"No process '{processName}' running");
+            Log.Write($"No process '{processName}' running");
             return;
         }
 
@@ -107,7 +107,7 @@ static class WindowHelper
         windows.Sort((a, b) => a.ToInt64().CompareTo(b.ToInt64()));
 
         if (windows.Count == 0) {
-            Console.WriteLine($"No window for '{processName}' on current desktop");
+            Log.Write($"No window for '{processName}' on current desktop");
             return;
         }
 
@@ -129,7 +129,7 @@ static class WindowHelper
         lastFocused[processName] = target;
         lastProcessName = processName;
         ForceForeground(target);
-        Console.WriteLine($"Focusing: {processName} (hwnd: 0x{target:X})"
+        Log.Write($"Focusing: {processName} (hwnd: 0x{target:X})"
             + (windows.Count > 1 ? $" [{windows.IndexOf(target) + 1}/{windows.Count}]" : ""));
     }
 

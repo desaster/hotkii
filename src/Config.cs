@@ -98,7 +98,7 @@ static class ConfigLoader
     public static AppConfig Load(string path)
     {
         if (!File.Exists(path)) {
-            Console.WriteLine($"Config not found, creating default: {path}");
+            Log.Write($"Config not found, creating default: {path}");
             WriteDefault(path);
         }
 

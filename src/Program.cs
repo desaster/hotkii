@@ -7,12 +7,12 @@ static class Program
     [STAThread]
     static void Main()
     {
-        Console.WriteLine($"Hotkii {BuildVersion.Git}");
+        Log.Write($"Hotkii {BuildVersion.Git}");
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
         Application.Run(new TrayForm());
 
-        Console.WriteLine("Hotkii exiting.");
+        Log.Write("Hotkii exiting.");
     }
 }

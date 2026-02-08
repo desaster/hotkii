@@ -26,7 +26,7 @@ static class AudioHelper
             enumerator = (IMMDeviceEnumerator) Activator.CreateInstance(type)!;
         } catch (Exception ex) {
             initError = ex.Message;
-            Console.WriteLine($"Failed to initialize audio API: {ex.Message}");
+            Log.Write($"Failed to initialize audio API: {ex.Message}");
         }
     }
 
@@ -94,12 +94,12 @@ static class AudioHelper
     {
         var device = FindDevice(partialName);
         if (device == null) {
-            Console.WriteLine($"Audio device not found: '{partialName}'");
+            Log.Write($"Audio device not found: '{partialName}'");
             return;
         }
 
         SetDefaultDevice(device.Id);
-        Console.WriteLine($"Switched audio to: {device.Name}");
+        Log.Write($"Switched audio to: {device.Name}");
     }
 
     public static void CycleDevices(List<string> deviceNames)
@@ -115,7 +115,7 @@ static class AudioHelper
         }
 
         if (candidates.Count == 0) {
-            Console.WriteLine("No matching audio devices available");
+            Log.Write("No matching audio devices available");
             return;
         }
 
@@ -128,17 +128,17 @@ static class AudioHelper
         var next = candidates[nextIndex];
 
         SetDefaultDevice(next.Id);
-        Console.WriteLine($"Switched audio to: {next.Name}");
+        Log.Write($"Switched audio to: {next.Name}");
     }
 
     public static void LogAvailableDevices()
     {
         var devices = GetOutputDevices();
         var current = GetDefaultDevice();
-        Console.WriteLine($"Audio output devices ({devices.Count}):");
+        Log.Write($"Audio output devices ({devices.Count}):");
         foreach (var d in devices) {
             var marker = d.Id == current?.Id ? " (default)" : "";
-            Console.WriteLine($"  {d.Name}{marker}");
+            Log.Write($"  {d.Name}{marker}");
         }
     }
 

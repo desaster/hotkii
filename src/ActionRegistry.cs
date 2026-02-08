@@ -17,12 +17,12 @@ static class ActionRegistry
                 try {
                     handler(hotkey);
                 } catch (Exception ex) {
-                    Console.WriteLine($"Error in action '{hotkey.Action}': {ex.Message}");
+                    Log.Write($"Error in action '{hotkey.Action}': {ex.Message}");
                 }
             };
         }
 
-        Console.WriteLine($"  Unknown action: '{hotkey.Action}'");
+        Log.Write($"  Unknown action: '{hotkey.Action}'");
         return null;
     }
 }
