@@ -86,7 +86,3 @@ Bring a running application's window to the foreground, but only if it has a win
 |---|---|---|
 | `process` | string | Process name without `.exe` |
 
-
-## Startup output
-
-Hotkii logs to the console it was launched from. This includes the list of detected audio devices, registered hotkeys, and any errors. Run it from a terminal to see this output.
