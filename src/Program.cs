@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace Hotkii;
@@ -8,8 +7,7 @@ static class Program
     [STAThread]
     static void Main()
     {
-        var version = Assembly.GetExecutingAssembly().GetName().Version;
-        Console.WriteLine($"Hotkii v{version?.ToString(3) ?? "?"}");
+        Console.WriteLine($"Hotkii {BuildVersion.Git}");
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);

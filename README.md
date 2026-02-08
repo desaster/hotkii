@@ -9,11 +9,12 @@ Runs in the system tray with no visible window. Right-click the tray icon to exi
 ## Requirements
 
 - Windows 11 22H2 or later. Earlier versions probably will not work, and maybe later versions will not work either when Microsoft breaks something.
+- [.NET 10.0 **Desktop** Runtime](https://dotnet.microsoft.com/download/dotnet/10.0) (x64) — must be the "Desktop Runtime", not the regular runtime
 
 
 ## Building
 
-Requires .NET 10.0 SDK. The build targets `win-x64` and is self-contained, so the target machine does not need .NET installed.
+Requires .NET 10.0 SDK. The build targets `win-x64`.
 
 ```
 dotnet publish -c Release

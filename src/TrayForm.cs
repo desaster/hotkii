@@ -19,6 +19,8 @@ class TrayForm : Form
         Visible = false;
 
         var contextMenu = new ContextMenuStrip();
+        contextMenu.Items.Add($"Hotkii {BuildVersion.Git}").Enabled = false;
+        contextMenu.Items.Add("-");
         contextMenu.Items.Add("Exit", null, OnExit);
 
         trayIcon = new NotifyIcon

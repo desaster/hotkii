@@ -5,7 +5,8 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <SelfContained>true</SelfContained>
+    <SelfContained>false</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <Version>0.1.0</Version>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -17,5 +18,20 @@
     <Compile Include="src\**\*.cs" />
     <EmbeddedResource Include="assets\icon.ico" LogicalName="Hotkii.icon.ico" />
   </ItemGroup>
+
+  <Target Name="SetGitVersion" BeforeTargets="CoreCompile">
+    <Exec Command="git describe --tags --always --dirty"
+          ConsoleToMSBuild="true"
+          StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="GitVersion" />
+    </Exec>
+    <WriteLinesToFile
+      File="$(IntermediateOutputPath)GitVersion.g.cs"
+      Lines="namespace Hotkii { static class BuildVersion { public const string Git = &quot;$(GitVersion)&quot;%3B } }"
+      Overwrite="true" />
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)GitVersion.g.cs" />
+    </ItemGroup>
+  </Target>
 
 </Project>
