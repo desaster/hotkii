@@ -7,6 +7,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <Version>0.1.0</Version>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
@@ -14,6 +15,7 @@
 
   <ItemGroup>
     <Compile Include="src\**\*.cs" />
+    <EmbeddedResource Include="assets\icon.ico" LogicalName="Hotkii.icon.ico" />
   </ItemGroup>
 
 </Project>
