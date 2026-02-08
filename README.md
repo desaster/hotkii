@@ -1,8 +1,12 @@
 # Hotkii
 
-A Windows 11 tray application that registers global hotkeys for switching virtual desktops, changing audio output devices, and focusing application windows.
+A Windows 11 tray application that registers global hotkeys for doing something.
 
-Runs in the system tray with no visible window. Right-click the tray icon to exit.
+This was created to my very specific needs:
+
+* Hotkeys for switching to specific virtual desktops (ctrl-1, ctrl-2, ...)
+* Hotkeys for quickly switching to a specific application within current virtual desktop (like a browser or a terminal window)
+* Hotkey for toggling between audio devices with no unnecessary nonsense
 
 ![Hotkii tray icon](pics/hotkii_tray_shot.png)
 
