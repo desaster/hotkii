@@ -63,6 +63,14 @@ class HotkeyConfig
         throw new ConfigException($"Action '{Action}' requires '{name}' argument");
     }
 
+    public string? GetOptionalStringArg(string name)
+    {
+        if (Args is JsonElement el && el.TryGetProperty(name, out var val)) {
+            return val.GetString();
+        }
+        return null;
+    }
+
     public List<string> GetStringListArg(string name)
     {
         if (Args is JsonElement el && el.TryGetProperty(name, out var val)

@@ -64,6 +64,20 @@ class TrayForm : Form
             string process = hotkey.GetStringArg("process");
             WindowHelper.FocusProcess(process);
         });
+
+        ActionRegistry.Register("run-command", hotkey =>
+        {
+            string command = hotkey.GetStringArg("command");
+            string? args = hotkey.GetOptionalStringArg("args");
+            var startInfo = new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = command,
+                Arguments = args ?? "",
+                UseShellExecute = true
+            };
+            System.Diagnostics.Process.Start(startInfo);
+            Log.Write($"Launched: {command}" + (args != null ? $" {args}" : ""));
+        });
     }
 
     private void LoadConfig()

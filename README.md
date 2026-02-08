@@ -86,3 +86,24 @@ Bring a running application's window to the foreground, but only if it has a win
 |---|---|---|
 | `process` | string | Process name without `.exe` |
 
+### run-command
+
+Run an arbitrary command. Useful for launching scripts or programs via hotkey.
+
+| Arg | Type | Description |
+|---|---|---|
+| `command` | string | Program or file to execute |
+| `args` | string | *(optional)* Command-line arguments |
+
+Uses shell execution, so program names are resolved via PATH and file associations (e.g. `.ps1`, `.bat`) work directly.
+
+Examples:
+```json
+{ "key": "C", "modifiers": ["Ctrl", "Alt"], "action": "run-command",
+  "args": { "command": "calc" } }
+```
+```json
+{ "key": "R", "modifiers": ["Ctrl", "Alt"], "action": "run-command",
+  "args": { "command": "powershell", "args": "-File C:\\scripts\\restart-service.ps1" } }
+```
+
